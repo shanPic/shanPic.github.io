@@ -5,4 +5,4 @@ title: About
 ---
 
 # Some info 
-...about how cool you are ;)
+欢迎来到shanPic的blog！
