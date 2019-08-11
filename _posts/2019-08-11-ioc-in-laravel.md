@@ -1,16 +1,17 @@
 ---
 layout: post
-title: "Ioc in Laravel"
+title: "Ioc容器与laravel服务容器初探"
 date: 2019-08-11 21:51:00
-description: Laravel中的Ioc容器
+description: Ioc容器与laravel服务容器初探
 comments: true
 tags: 
  - PHP
  - Laravel
 ---
-#一、Ioc容器
+
+# 一、Ioc容器
 某天，小J心血来潮，决定建造一艘星舰，这艘星舰要搭载“与众不同最时尚，开火肯定棒”的电磁炮。于是他写了一个星舰类：
-```
+```php
 class ElectromagneticGun
 {
     public function fire() {
@@ -29,7 +30,7 @@ $powerfulStarShip = new StarShip();
 ```
 StarShip在构造时必须要new一个ElectromagneticGun，依靠其实现fire的功能。即StarShip“依赖”于ElectromagneticGun。
 这艘星舰火力强大，所向披靡。直到有一天，他碰到了速度奇快的“无敌舰队”。他决定将电磁炮更换“炮弹”速度为光速的激光炮。
-```
+```php
 class LaserGun
 {
     public function fire() {
@@ -38,7 +39,7 @@ class LaserGun
 }
 ```
 当然，最直接的办法就是在starShip的构造函数中将electromagneticGun()更改为laserGun()。但小J并不想将他的宝贝星舰大卸八块，然后塞进一个新的东西。于是他对星舰与战炮进行了控制反转（IOC）的改造，采用了依赖注入（DI）的方式。现在，他的星舰与战炮看起来像这个样子了：
-```
+```php
 interface Gun
 {
     public function fire();
@@ -72,7 +73,7 @@ $powerfulStarShip = new starShip($newGun);
 在这次改造中，原本由对象自己new的依赖，变成了在对象外部创建。获得依赖的方式转移（反转）了，即“控制反转”。
 装备了激光炮的小J，在与无敌舰队的战斗中大获全胜，缴获了大量的资源。
 小J想要建造更多的星舰，每艘星舰搭载一门电磁炮或一门激光炮，但作为一个程序员，他无法忍受每次想要新造一艘星舰，都要手动new一个Gun的对象，然后注入，甚至在有些时候，他会忘记为星舰new一个Gun然后Gun，导致这个星舰无法建造。他想要更加优雅的方式来建造星舰，管理武器。于是，他创建了一个简单的Ioc容器。
-```
+```php
 class Container
 {
     protected $binds = array();
@@ -120,18 +121,17 @@ $starShip2 = $container->make('StarShip',['LaserGun']);
 请注意，我们在注册容器的时候，为了能够使用容器解决StarShip的“次要依赖”（类绑定在了容器中，但生成它的对象还需要其他依赖），将容器本身作为了闭包的第一个参数。
 现在，通过Ioc容器这样一个第三者，在创建StarShip对象的时候，我们完全不需要去考虑如何满足它的依赖：只要我们提前绑定好，容器就会为我们解析出我们想要的依赖。
 引用几张经典的图片，我们的系统由解耦之前：
-![](https://i.imgur.com/Ux2Ey8Y.png)
+![](https://i.imgur.com/Ux2Ey8Y.png){:.center-image }
 变成了解耦之后的：
-![](https://i.imgur.com/DJhlvza.png)
-![](https://i.imgur.com/VDHwgid.png)
+![](https://i.imgur.com/DJhlvza.png){:.center-image }
+![](https://i.imgur.com/VDHwgid.png){:.center-image }
 这就是Ioc容器的好处。
 另外，成熟的Ioc容器一般都会利用其实现语言的“反射”技术来取代上面需要我们“手写”的闭包，以及自动解决容器内的“次要依赖”。当然，对某些不支持反射的语言，就要另当别论了（没错，我说的就是C++）。。。
-#二、Laravel中的服务容器
+# 二、Laravel中的服务容器
 Laravel框架是一个容器框架，框架应用程序的实例就是一个超大的Ioc容器，Laravel将其称为“服务容器”。
 在每次请求的声明周期中，Laravel 自身的第一个动作就是创建一个服务容器的实例，它在整个请求声明周期中是唯一的。熟悉的，我们可以通过app()这个help函数以及APP这个facade来获取或访问到这个服务容器的实例。
 服务容器的实现在 Illuminate\Container\Container.php 中，我们观察一下它的核心代码（精简了大部分代码）：
-```
-
+```php
 class Container
 {
 
@@ -253,7 +253,7 @@ build() 方法会检测concrete是否为闭包。若为闭包，直接构造即�
 
 以上的服务容器源码是大幅精简之后的，完整的源码还有许多诸如别名、绑定实体、获取容器属性等等的处理与方法。但其实我们可以发现其和我们在上面实现的“幼儿园”版Ioc容器的思想是一样的：利用一个array存储可生成对象的闭包，从而能够作为一个第三者，为各组件提供自动化的依赖注入，实现了组件之间的解耦。
 
-#三、服务提供者
+# 三、服务提供者
 只要能够拿到服务容器的实例，我们就可以进行类（服务）的绑定。但若我们不进行一个统一的绑定/初始化操作，可能会出现需要某一对象时，忘记绑定其依赖的情况。那岂不是失去了服务容器的原本意义？所以Laravel提供了服务提供者，能够使我们在业务代码开始之前，应用程序初始化的时候进行绑定。
 laravel加载自定义服务提供者的时候，是从config/app.php这个配置文件里面的providers中找到所有的服务提供者的。
 所以你如果自己写了一个服务提供者，那么只要配置到这里面，laravel就会自动帮你注册它了。
