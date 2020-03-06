@@ -45,7 +45,7 @@ body {
   background-color: $post-panel-color;
   box-shadow: 0 0 0 0, 0 8px 16px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
-  padding: 33px;
+  padding: 30px;
   font-size: 14px;
 }
 .main-page {
@@ -186,7 +186,7 @@ div.post-meta {
   border-width: 1px 0;
   border-color: #666666;
   border-style: solid;
-  margin: 0 0 33px;
+  margin: 0 0 30px;
   ul {
     display: inline;
     padding-left: 0;
@@ -195,7 +195,7 @@ div.post-meta {
   }
   ul > li {
     display: inline;
-    padding: 0 0 5px 33px;
+    padding: 0 0 5px 30px;
   }
   .post-time {
     display: inline;
