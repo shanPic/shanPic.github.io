@@ -122,12 +122,12 @@ $starShip2 = $container->make('StarShip',['LaserGun']);
 现在，通过Ioc容器这样一个第三者，在创建StarShip对象的时候，我们完全不需要去考虑如何满足它的依赖：只要我们提前绑定好，容器就会为我们解析出我们想要的依赖。
 引用几张经典的图片，我们的系统由解耦之前：
 <!-- ![](https://i.imgur.com/Ux2Ey8Y.png){:.center-image } -->
-![](../resource/images/2019-08-11-ioc-in-laravel/解耦前.png){:.center-image }
+![](/resource/images/2019-08-11-ioc-in-laravel/解耦前.png){:.center-image }
 变成了解耦之后的：
 <!-- ![](https://i.imgur.com/DJhlvza.png){:.center-image } -->
-![](../resource/images/2019-08-11-ioc-in-laravel/解耦后-1.png){:.center-image }
+![](/resource/images/2019-08-11-ioc-in-laravel/解耦后-1.png){:.center-image }
 <!-- ![](https://i.imgur.com/VDHwgid.png){:.center-image } -->
-![](../resource/images/2019-08-11-ioc-in-laravel/解耦后-2.png){:.center-image }
+![](/resource/images/2019-08-11-ioc-in-laravel/解耦后-2.png){:.center-image }
 这就是Ioc容器的好处。
 另外，成熟的Ioc容器一般都会利用其实现语言的“反射”技术来取代上面需要我们“手写”的闭包，以及自动解决容器内的“次要依赖”。当然，对某些不支持反射的语言，就要另当别论了（没错，我说的就是C++）。。。
 # 二、Laravel中的服务容器
