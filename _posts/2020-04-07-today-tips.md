@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "今日Tips"
+title: "今日碎片"
 date: 2020-04-07 00:00:00
 description: 2020-04-07
 comments: false
 tags: 
- - 每日tips
+ - 每日碎片
  - C++
  - CMake
 ---
