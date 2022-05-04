@@ -3,3 +3,4 @@ _site
 .jekyll-metadata
 .bundle
 .jekyll-cache
+.DS_Store
