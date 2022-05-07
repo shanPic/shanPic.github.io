@@ -23,27 +23,29 @@
 //$accent-color: #35B4DE;  // bluish
 //$accent-color: #D2E354;  // yellowish
 //$accent-color: #52B54B;  // green
-$accent-color: #195858;
+$accent-color: #216174d5;
 
 $font-color: #000003;
-$background-color: #e9e9e9;
-$post-panel-color: #e9e9e9a8;
-$footer-background-color: #e9e9e93b;
+// $background-color: #e9e9e9;
+$background-color: #F7F9F9;
+$post-panel-color: #FDFEFE;
+$footer-background-color: #F4F6F7;
 $note-color: #87CEFA;
 $warning-color: #ffff00;
 // use this or pick any from /css/pics/background folder or from transparenttextures.com
-$background-pattern: 'shattered-dark.png';
+// $background-pattern: 'shattered-dark.png';
+$background-pattern: 'asfalt-light.png';
 
 //********************************************************
 //                  Common styles
 //********************************************************
 body {
   color: $font-color;
-  background: $background-color url(pics/background/#{$background-pattern});
+  background: $background-color;
 }
 .card {
   background-color: $post-panel-color;
-  box-shadow: 0 0 0 0, 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 0 0, 0 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
   padding: 16px;
   font-size: 14px;
@@ -169,10 +171,10 @@ ul.sideBarTags {
   list-style: none;
   li:before {
     content: '\f02b';
-    font-family: 'Font Awesome 5 Free';
+    font-family: 'inherit';
     float: left;
     margin-left: -1.5em;
-    font-weight: 900;
+    font-weight: inherit;
   }
 }
 
@@ -184,10 +186,11 @@ h2.post-title {
   text-align: left;
 }
 div.post-meta {
-  border-width: 1px 0;
+  border-width: 0 0 1px 0;
   border-color: #666666;
   border-style: solid;
-  margin: 0 0 30px;
+  color: #393939a6;
+  margin: 0 0 0.3em;
   ul {
     display: inline;
     padding-left: 0;
@@ -201,6 +204,10 @@ div.post-meta {
   .post-time {
     display: inline;
   }
+}
+
+div.post-descr {
+  margin: 0 0 0.9em;
 }
 .post-footer {
   height: 40px;
@@ -238,7 +245,7 @@ blockquote.warning p{
   font-style: normal;
   content: "\f06a";
   font-size: 2em;
-  font-family: FontAwesome;
+  font-family: inherit;
   left: 0;
   position:absolute;
   top: 0;
@@ -253,24 +260,24 @@ blockquote.warning p{
 //                    Header
 //********************************************************
 nav {
-  background-color: #222;
-  border-color: #080808;
+  background-color: #ECF0F1;
+  border-color: #0c92849e;
   font-size: 18px;
-  font-family: "Ubuntu", sans-serif;
+  font-family: "inherit";
   padding: 0 10px !important;
-  border-top: 3px #3CA2A2 solid;
-  border-bottom: 1px #000000 solid;
+  // border-top: 3px #3CA2A2 solid;
+  // border-bottom: 1px #0c92849e solid;
   .navbar-brand, .nav-link {
-   color: #777;
+   color: #000003;
    @include transition(color 0.31s);
    transition: all .7s ease;
   }
   .navbar-brand:hover, .nav-link:hover {
-    color: white !important;
+    color: rgb(111, 111, 111) !important;
   }
   .navbar-brand {
     font-size: 30px;
-    color: #777;
+    color: #000003;
   }
   .navbar-nav {
     margin-left: auto;
@@ -428,7 +435,7 @@ table.inner-borders {
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   margin: 0;
-  font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+  font-family: "inherit";
   border-left: 0;
   bottom: -2px;
   position: relative;
