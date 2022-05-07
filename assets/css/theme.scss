@@ -48,7 +48,7 @@ body {
   box-shadow: 0 0 0 0, 0 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
   padding: 16px;
-  font-size: 14px;
+  font-size: 15px;
 }
 .main-page {
   width: 75%;
@@ -165,15 +165,17 @@ ul.share-buttons {
 //********************************************************
 .sidebar li {
   margin-top: .7em;
-  line-height: 1em;
+  line-height: 0.9em;
+  font-size: 0.9em;
 }
 ul.sideBarTags {
   list-style: none;
+  font-size: 0.9em;
   li:before {
     content: '\f02b';
     font-family: 'inherit';
     float: left;
-    margin-left: -1.5em;
+    margin-left: -3em;
     font-weight: inherit;
   }
 }
@@ -187,7 +189,7 @@ h2.post-title {
 }
 div.post-meta {
   border-width: 0 0 1px 0;
-  border-color: #666666;
+  border-color: #666666ac;
   border-style: solid;
   color: #393939a6;
   margin: 0 0 0.3em;
